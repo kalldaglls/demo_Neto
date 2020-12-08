@@ -1,0 +1,14 @@
+@startuml
+abstract class Animal
+Animal : +jump()
+Animal : +run()
+
+abstract class Swimmable
+Swimmable : + swim()
+
+Animal <-- Cat
+Animal <-- Swimmable
+Swimmable <-- Dog
+Swimmable <-- Hypo
+
+@enduml
