@@ -20,7 +20,7 @@ public class Server {
             System.out.println("Server is starting up!");
             ServerSocket serverSocket = new ServerSocket(18443);
             System.out.println("Waiting for connection!");
-            Socket socket = serverSocket.accept();//Создаем "экземпляр" клиента
+            Socket socket = serverSocket.accept();//Создаем "экземпляр" клиента/ С
             System.out.println("Client connected: " + socket);
 
             ins = new DataInputStream(socket.getInputStream());

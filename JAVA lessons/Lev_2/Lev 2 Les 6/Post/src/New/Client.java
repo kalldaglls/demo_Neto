@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Client {
 
@@ -24,23 +25,21 @@ public class Client {
         new Client();
     }
 
-    public Client() {
-    }
 
-    public Client(JTextArea chatArea) {
-        this.chatArea = chatArea;
+    public Client() {
+       // this.chatArea = chatArea;
         try {
-            Socket socket = new Socket("localhost", 18443);// Как этот socket соотносится с socket в классе Server?
+            Socket socket = new Socket("localhost", 8843);// Как этот socket соотносится с socket в классе Server?
             System.out.println("Client info: " + socket);
 
             ins = new DataInputStream(socket.getInputStream());
             outs = new DataOutputStream(socket.getOutputStream());
 
             //Если оставлял строки ниже, то GUI работал криво с сервером!
-            /*
-            outs.writeUTF("Some message!");//Отправляем первое сообщение серверу!
-            outs.writeUTF("and New message!");
-             */
+
+            outs.writeUTF("2");//Отправляем первое сообщение серверу!
+            //outs.writeUTF("and New message!");
+
 
             new Thread(new Runnable() {
                 @Override
@@ -48,7 +47,8 @@ public class Client {
                     try {
                         while (true) {
                             String message = ins.readUTF();
-                            chatArea.append(message);
+                            System.out.println(message);
+                            //chatArea.append(message);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();

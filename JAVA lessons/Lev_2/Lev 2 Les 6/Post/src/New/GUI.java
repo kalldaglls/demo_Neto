@@ -15,7 +15,7 @@ public class GUI extends JFrame {
 
     public GUI() {
         JTextArea jTextArea = new JTextArea();
-        client = new Client(jTextArea);
+        //client = new Client(jTextArea);
         setTitle("Chat for Serega!");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
