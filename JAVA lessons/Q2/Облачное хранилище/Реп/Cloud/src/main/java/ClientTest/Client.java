@@ -27,7 +27,7 @@ public class Client {
 
     public Client() {
         try {
-            Socket socket = new Socket("localhost", 8843);
+            Socket socket = new Socket("localhost", 8845);
             System.out.println("Client info: " + socket);
 
             ins = new DataInputStream(socket.getInputStream());
@@ -37,9 +37,18 @@ public class Client {
             //outs.write("New File".getBytes(StandardCharsets.UTF_8));
             //byte[] fileContent = Files.readAllBytes(Paths.get("C:\\Users\\Тереза\\Desktop\\JAVA lessons\\Q2\\Облачное хранилище\\Реп\\Cloud\\CheckSave.txt"));
             FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Тереза\\Desktop\\JAVA lessons\\Q2\\Облачное хранилище\\Реп\\Cloud\\CheckSave.txt");
-            outs.write(fileInputStream.readAllBytes());
-            //outs.flush();
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
+            byte [] bytes = {66,67,78,89};
+            bufferedOutputStream.write(fileInputStream.readAllBytes());
+            System.out.println("Got here?");
+            bufferedOutputStream.flush();
 
+            try {
+                Thread.sleep(500000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            /*
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -53,6 +62,8 @@ public class Client {
                     }
                 }
             }).start();
+
+             */
         } catch (IOException e) {
             e.printStackTrace();
         }

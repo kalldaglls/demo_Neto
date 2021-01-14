@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FileServer {
@@ -14,7 +15,7 @@ public class FileServer {
     public FileServer() {
         DataOutputStream outs = null;
         try {
-            ServerSocket serverSocket = new ServerSocket(8843);
+            ServerSocket serverSocket = new ServerSocket(8845);
             System.out.println("Waiting for connection!");
             Socket socket = serverSocket.accept();
             System.out.println("Client connected: " + socket);
@@ -29,23 +30,29 @@ public class FileServer {
                 outs.writeUTF(getFileList().toString());
             }
             if(message.equals("2")) {
-                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-                int nRead;//Почему, если здесь я присваиваю nRead = ins.read(), то в цикле значение не меняется?
-                byte[] data = new byte[16384];
-                //System.out.println("первый" + ins.read());
+                try (BufferedInputStream bins = new BufferedInputStream(socket.getInputStream())) {
 
-                FileInputStream fileInputStream = new FileInputStream("C:\\JAVA\\IdeaProjects\\test\\New.txt");
-                byte [] newBytes = fileInputStream.readAllBytes();
-                while ((nRead = newBytes.read()) != -1) {//Может ли он быть равен -1?
-                    buffer.write(nRead);
-                    System.out.println(nRead);
+                    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                    int nRead;//Почему, если здесь я присваиваю nRead = ins.read(), то в цикле значение не меняется?
+                    byte[] data = new byte[1024];
+                    //System.out.println("первый" + ins.read());
+
+                    while ((nRead = bins.read()) != -1) {//Может ли он быть равен -1?
+                        buffer.write(nRead);
+                        System.out.println(nRead);
+                        System.out.println("Next");
+                    }
+                    System.out.println("No breakpoint 2?");
+                    String name = "File #1.txt";
+                    saveFile(buffer.toByteArray(),name);
+                    outs.writeUTF("File saved");
                 }
-                System.out.println("No breakpoint?");
-                byte [] bytes = buffer.toByteArray();
 
-                String name = "File #1.txt";
-                saveFile(bytes,name);
-                outs.writeUTF("File saved");
+                /*
+                System.out.println("No breakpoint?");
+                System.out.println(Arrays.toString(ins.readAllBytes()));
+                byte [] bytes = socket.getInputStream().readAllBytes();
+                 */
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
@@ -91,4 +98,6 @@ public class FileServer {
         }
         System.out.println(newFile);
     }
+
+
 }
