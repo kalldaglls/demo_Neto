@@ -9,20 +9,18 @@ public class Plate {
         this.number = number;
     }
 
-    public void decreaseFood(int n) {
+    public boolean decreaseFood(int n) {//Большой плюс - сделал decreaseFood булейным и работал с ним в Cat правильно!
         if(food < n) {
             System.out.println("Not enough food in " + this);
-            return;
+            return false;
         }
-        addFood();
         System.out.println(this + " is being eat!");
         food -= n;
+        return true;
     }
 
     public void addFood(){
-        if(food <= 0){
             food = food + 50;
-        }
     }
 
     public void info() {

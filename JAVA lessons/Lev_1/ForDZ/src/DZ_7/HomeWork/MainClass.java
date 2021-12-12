@@ -13,18 +13,18 @@ package DZ_7.HomeWork;
 */
 public class MainClass {
     public static void main(String[] args) {
-        Cat cat = new Cat("Barsik", 105);
-        Cat cat1 = new Cat("Anton", 51);
-        Cat [] cats = new Cat[] {
+
+        Cat [] cats = new Cat[] {//Мини-плюс - вместо добавления к cats нового члена отдельно сделал так! Сразу подумал так!
                 new Cat("Semen", 12),
                 new Cat("Puss", 39),
                 new Cat("Marshsall", 55)
         };
         Plate plate = new Plate(100, 1);
-        plate.info();
-        cat.eat(plate);
-        plate.info();
-        cat1.eat(plate);
+
+        for (Cat catNew:cats) {// Мини-минус - сразу из головы не взял правильный foreach, а гуглил!
+            catNew.eat(plate);
+        }
+        plate.addFood();
         plate.info();
     }
 }

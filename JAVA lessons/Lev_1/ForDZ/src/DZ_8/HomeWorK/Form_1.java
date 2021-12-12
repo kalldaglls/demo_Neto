@@ -33,6 +33,7 @@ public class Form_1 extends JFrame {
 
         JPanel jPanel1 = new JPanel(new GridLayout(5,3));
         jPanel1.setBackground(new Color(24,87,157));
+        JScrollPane jScrollPane = new JScrollPane(jPanel1);
 
         for (int i = 0; i <= 9; i++) {
             JButton digits = new JButton(String.valueOf(i));
@@ -42,14 +43,14 @@ public class Form_1 extends JFrame {
         }
 
         JButton plus = new JButton(String.valueOf('+'));
-        plus.addActionListener(buttonListener);
         JButton minus = new JButton(String.valueOf('-'));
-        minus.addActionListener(buttonListener);
         JButton multiple = new JButton(String.valueOf('*'));
-        multiple.addActionListener(buttonListener);
-        JButton duplipile = new JButton(String.valueOf('/'));
-        duplipile.addActionListener(buttonListener);
+        JButton divide = new JButton(String.valueOf('/'));
         JButton clear = new JButton(String.valueOf('C'));
+        plus.addActionListener(buttonListener);
+        minus.addActionListener(buttonListener);
+        multiple.addActionListener(buttonListener);
+        divide.addActionListener(buttonListener);
         clear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,7 +63,7 @@ public class Form_1 extends JFrame {
         jPanel1.add(plus);
         jPanel1.add(minus);
         jPanel1.add(multiple);
-        jPanel1.add(duplipile);
+        jPanel1.add(divide);
         jPanel1.add(clear);
 
 
@@ -75,6 +76,7 @@ public class Form_1 extends JFrame {
 
         add(jPanel1);
         add(jPanel);
+        add(jScrollPane, BorderLayout.SOUTH);
         //add(new JScrollPane());
 
         setVisible(true);

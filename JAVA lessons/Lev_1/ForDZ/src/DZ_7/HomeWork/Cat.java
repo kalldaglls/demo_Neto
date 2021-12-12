@@ -10,9 +10,23 @@ public class Cat {
         this.appetite = appetite;
     }
 
-    public void eat(Plate p) {
-//        if(p.decreaseFood(appetite))
-        p.decreaseFood(appetite);
-        this.satiety = true;
+    public void eat(Plate p) {//Макс предложил, чтобы здесь возвращал булиан - умно!
+      if(p.decreaseFood(appetite)) {
+          satiety = true;//Спорно!
+          System.out.println(this);
+      }
+      else {
+          System.out.println("{Дела ведем у кота в методе!] \n" + this + " doesn't have enough food to eat! ");//Мини-мини-плюс - вспомнил и вставил перенос строки!
+      }
+        p.info();
+    }
+
+    @Override
+    public String toString() {
+        return "Cat{" +
+                "name='" + name + '\'' +
+                ", appetite=" + appetite +
+                ", satiety=" + satiety +
+                '}';
     }
 }

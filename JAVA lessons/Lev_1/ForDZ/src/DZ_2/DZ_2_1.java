@@ -2,6 +2,7 @@ package DZ_2;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class DZ_2_1 {
     public static void main(String[] args) {
@@ -29,18 +30,18 @@ public class DZ_2_1 {
 
         //fillDiagonalEl();
 
-       // findMinMaxEl(checkHight);
+       //findMinMaxEl(checkHight);
 
-        //System.out.println(checkSumm(summ));
+        System.out.println(checkSumm(summ));
 
         //System.out.println(checkSumm(summ1));
 
-        changePlace(changeableArr,2);
+        //changePlace(changeableArr,-1);
 
-        changePlace(checkHight, 2);
+        //changePlace(checkHight, 2);
     }
 
-    public static void switchArrayElements(int [] a){
+    public static void switchArrayElements(int [] a){// можно ли сделать через switch?
         for (int i = 0; i < a.length; i++) {
             if(a[i] == 2) {
                 a[i] = 5;
@@ -49,6 +50,14 @@ public class DZ_2_1 {
         }
         System.out.println(Arrays.toString(a));
     }
+
+//    public static void switchArrayElements2(int [] a){
+//        switch (a) {
+//            case 2 : {
+//
+//            }
+//        }
+//    }
 
     public static void fillArray(int [] b) {
         int [] c = {0,3,6,9,12,15,18,21};
@@ -90,8 +99,8 @@ public class DZ_2_1 {
                 {0, -82, 91, 112, 0}
         };
         for (int i = 0; i < numbers.length; i++) {
-            numbers[i][i] = 1;
-            numbers[i][numbers.length -1 - i] = 1;
+            numbers[i][i] = 98889;
+            numbers[i][numbers.length -1 - i] = 98889;
         }
         System.out.println(Arrays.deepToString(numbers));
     }
@@ -99,6 +108,7 @@ public class DZ_2_1 {
     public static void findMinMaxEl(int [] b) {
         int min = b[0];
         int max = b[0];
+        System.out.println(Arrays.toString(b));
         for (int i = 1; i < b.length; i++) {
             if(min > b[i]) {
                 min = b[i];
@@ -110,10 +120,13 @@ public class DZ_2_1 {
     }
 
     public static boolean checkSumm(int [] b) {//Как сделать, чтобы исключения не впускать?
+        int total = IntStream.of(b).sum();
+        System.out.println(total);
         int sum = 0;
-        for (int i = 0; i < b.length; i++) {
+        for (int i = 0; i < b.length; i++) {//Как посчитать сумму элементов массива?
             sum = sum + b[i];
         }
+        System.out.println(sum);
         int minusSum = 0;
         for (int i = 0; i < b.length; i++) {
             if (minusSum == sum) {
@@ -130,16 +143,30 @@ public class DZ_2_1 {
     }
 
     public static void changePlace(int [] b, int n) {
-
-        int a = b[0];
-        for (int i = 0; i < b.length; i++) {
-            if (i == b.length -1) {
-                b[i] = a;
-                System.out.println(Arrays.toString(b));
-                System.out.println(n);
-                break;
+        if(n >= 0) {
+            int a = b[0];
+            for (int i = 0; i < b.length; i++) {
+                if (i == b.length - 1) {
+                    b[i] = a;
+                    System.out.println(Arrays.toString(b));
+                    System.out.println(n);
+                    break;
+                }
+                b[i] = b[i + 1];
             }
-            b[i] = b[i + 1];
         }
+        if(n < 0) {
+            int a = b[4];
+            for (int i = b.length - 1; i >= 0; i--) {
+                if (i == 0) {
+                    b[i] = a;
+                    System.out.println(Arrays.toString(b));
+                    System.out.println(n);
+                    break;
+                }
+                b[i] = b[i - 1];
+            }
+        }
+
     }
 }
